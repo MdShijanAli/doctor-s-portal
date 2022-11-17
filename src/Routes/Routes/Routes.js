@@ -1,11 +1,14 @@
+import DashBoardLayout from "../../layouts/DashBoardLayout";
 import About from "../../Pages/About/About";
 import Appoinment from "../../Pages/Appoinment/Appointment/Appoinment";
 import ContactUs from "../../Pages/ContactUs/ContactUs";
-import Dashboard from "../../Pages/DashBoard/Dashboard/Dashboard";
+import AllUsers from "../../Pages/DashBoard/AllUsers/AllUsers";
+import MyAppointment from "../../Pages/DashBoard/MyAppointment/MyAppointment";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Reviews from "../../Pages/Reviews/Reviews";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivetRoute from "../PrivetRoute/PrivetRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -49,6 +52,16 @@ export const routes = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivetRoute><Dashboard></Dashboard></PrivetRoute>
+        element: <PrivetRoute><DashBoardLayout></DashBoardLayout></PrivetRoute>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <MyAppointment></MyAppointment>
+            },
+            {
+                path: '/dashboard/users',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            }
+        ]
     }
 ])
